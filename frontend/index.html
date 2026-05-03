@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2 id="formTitle">Login 👋</h2>
+
+        <!-- 🔥 NAME (HIDDEN DEFAULT) -->
+        <input id="name" placeholder="Full Name" style="display:none;">
+
+        <!-- EMAIL -->
+        <input id="email" placeholder="Email">
+
+        <!-- PASSWORD -->
+        <input id="password" type="password" placeholder="Password">
+
+        <!-- 🔥 ROLE (HIDDEN DEFAULT) -->
+        <select id="role" style="display:none;">
+            <option value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="member">Employee</option>
+        </select>
+
+        <!-- 🔥 MAIN BUTTON -->
+        <button id="actionBtn">Login</button>
+
+        <!-- MESSAGE -->
+        <p id="msg"></p>
+
+        <!-- 🔥 TOGGLE -->
+        <p id="toggleText">
+            Don't have an account?
+            <span onclick="toggleForm()" style="cursor:pointer;color:#60a5fa;">
+                Signup
+            </span>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>

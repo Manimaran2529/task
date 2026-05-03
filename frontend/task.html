@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <div class="login-card">
+
+        <h2 id="formTitle">Login 👋</h2>
+
+        <!-- NAME (HIDDEN INITIALLY) -->
+        <input id="name" placeholder="Full Name" style="display:none;">
+
+        <!-- EMAIL -->
+        <input id="email" placeholder="Email">
+
+        <!-- PASSWORD -->
+        <input id="password" type="password" placeholder="Password">
+
+        <!-- ROLE (HIDDEN INITIALLY) -->
+        <select id="role" style="display:none;">
+            <option value="">Select Role</option>
+            <option value="admin">Admin</option>
+            <option value="member">Employee</option>
+        </select>
+
+        <!-- BUTTON -->
+        <button id="actionBtn">Login</button>
+
+        <p id="msg"></p>
+
+        <!-- TOGGLE -->
+        <p class="switch" id="toggleText">
+            Don't have an account?
+            <span onclick="toggleForm()">Signup</span>
+        </p>
+
+    </div>
+
+</div>
+
+<script src="js/auth.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("actionBtn").onclick = login;
+});
+</script>
+
+</body>
+</html>

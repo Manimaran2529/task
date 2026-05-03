@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- ================= SIDEBAR ================= -->
+    <div class="sidebar">
+        <h2>🚀 Task Manager</h2>
+
+        <ul>
+            <li id="nav-dashboard">📊 Dashboard</li>
+            <li id="nav-tasks">📌 Tasks</li>
+            <li id="nav-users">👥 Employees</li>
+            <li id="nav-logout">🚪 Logout</li>
+        </ul>
+    </div>
+
+    <!-- ================= MAIN ================= -->
+    <div class="main">
+
+        <!-- ================= DASHBOARD ================= -->
+        <div id="dashboard" class="section">
+            <h1>Dashboard 📊</h1>
+
+            <div class="cards">
+                <div class="box">
+                    <h3>Total Tasks</h3>
+                    <p id="total">0</p>
+                </div>
+
+                <div class="box">
+                    <h3>Completed</h3>
+                    <p id="completed">0</p>
+                </div>
+
+                <div class="box">
+                    <h3>Pending</h3>
+                    <p id="pending">0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= TASKS ================= -->
+        <div id="tasks" class="section" style="display:none;">
+            <h1>Tasks 📌</h1>
+
+            <div class="form-card">
+                <h3>Create Task</h3>
+
+                <input id="taskTitle" placeholder="Title">
+                <input id="taskDesc" placeholder="Description">
+                <input id="taskDue" type="date">
+
+                <select id="assignType">
+                    <option value="one">Assign to One</option>
+                    <option value="all">Assign to All</option>
+                </select>
+
+                <select id="employeeSelect">
+                    <option value="">Select Employee</option>
+                </select>
+
+                <button onclick="createTask()">Create Task</button>
+            </div>
+
+            <div id="taskList"></div>
+        </div>
+
+        <!-- ================= USERS ================= -->
+        <div id="users" class="section" style="display:none;">
+            <h1>Employees 👥</h1>
+
+            <!-- ADD EMPLOYEE -->
+            <div class="form-card">
+                <h3>Add Employee</h3>
+
+                <input id="empName" placeholder="Name">
+                <input id="empEmail" placeholder="Email">
+                <input id="empPassword" type="password" placeholder="Password">
+
+                <button id="addBtn">Add Employee</button>
+            </div>
+
+            <!-- EMPLOYEE TABLE -->
+            <div class="table-card">
+                <table class="employee-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        <tr>
+                            <td colspan="4">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ================= JS ================= -->
+<script src="js/dashboard.js"></script>
+<script src="js/task.js"></script>
+
+<!-- ================= AUTH CHECK ================= -->
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+if (!user) {
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
