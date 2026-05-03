@@ -9,17 +9,17 @@ auth = Blueprint("auth", __name__)
 # =========================
 @auth.route("/signup", methods=["POST"])
 def signup():
-    data = request.json
+    data = request.get_json()
 
-    # Basic validation
-    if not data.get("name") or not data.get("email") or not data.get("password") or not data.get("role"):
+    # ✅ Validation
+    if not data or not data.get("name") or not data.get("email") or not data.get("password") or not data.get("role"):
         return jsonify({"message": "All fields are required"}), 400
 
     conn = get_db()
     cursor = conn.cursor()
 
     try:
-        # Check if user already exists
+        # ✅ Check existing user
         existing_user = cursor.execute(
             "SELECT * FROM users WHERE email=?",
             (data["email"],)
@@ -28,10 +28,10 @@ def signup():
         if existing_user:
             return jsonify({"message": "User already exists"}), 400
 
-        # Insert new user
+        # ✅ Insert user
         cursor.execute(
             "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)",
-            (data["name"], data["email"], data["password"], data["role"])
+            (data["name"], data["email"], data["password"], data["role"].lower())
         )
 
         conn.commit()
@@ -39,10 +39,11 @@ def signup():
         return jsonify({"message": "User created successfully"}), 201
 
     except Exception as e:
-        return jsonify({"message": f"Error: {str(e)}"}), 500
+        print("Signup Error:", e)
+        return jsonify({"message": "Server error"}), 500
 
     finally:
-        conn.close()   # ✅ always close connection
+        conn.close()
 
 
 # =========================
@@ -50,43 +51,75 @@ def signup():
 # =========================
 @auth.route("/login", methods=["POST"])
 def login():
-    data = request.json
+    data = request.get_json()
 
-    if not data.get("email") or not data.get("password"):
+    if not data or not data.get("email") or not data.get("password"):
         return jsonify({"message": "Email and password required"}), 400
 
     conn = get_db()
     cursor = conn.cursor()
 
     try:
+        print("LOGIN API CALLED:", data)  # 🔍 debug
+
         user = cursor.execute(
             "SELECT * FROM users WHERE email=? AND password=?",
             (data["email"], data["password"])
         ).fetchone()
 
+        print("USER FOUND:", user)  # 🔍 debug
+
         if user:
+            # ✅ SAFE RESPONSE (NO dict(user))
             return jsonify({
                 "message": "Login success",
-                "user": dict(user)
+                "user": {
+                    "id": user[0],
+                    "name": user[1],
+                    "email": user[2],
+                    "role": user[4]
+                }
             }), 200
+
         else:
             return jsonify({"message": "Invalid credentials"}), 401
 
     except Exception as e:
-        return jsonify({"message": f"Error: {str(e)}"}), 500
+        print("Login Error:", e)
+        return jsonify({"message": "Server error"}), 500
 
     finally:
-        conn.close()   # ✅ important
+        conn.close()
 
 
+# =========================
+# GET USERS
+# =========================
 @auth.route("/users", methods=["GET"])
 def get_users():
     conn = get_db()
     cursor = conn.cursor()
 
-    users = cursor.execute(
-        "SELECT id, name, email, role FROM users"
-    ).fetchall()
+    try:
+        users = cursor.execute(
+            "SELECT id, name, email, role FROM users"
+        ).fetchall()
 
-    return jsonify([dict(u) for u in users])
+        # ✅ Safe conversion
+        result = []
+        for u in users:
+            result.append({
+                "id": u[0],
+                "name": u[1],
+                "email": u[2],
+                "role": u[3]
+            })
 
+        return jsonify(result)
+
+    except Exception as e:
+        print("Users Error:", e)
+        return jsonify([]), 500
+
+    finally:
+        conn.close()
