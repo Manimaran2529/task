@@ -68,7 +68,7 @@ async function signup() {
     }
 
     try {
-        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/signup", {
+        const res = await fetch("task-production-eef1.up.railway.app/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password, role })
@@ -112,7 +112,7 @@ async function login() {
     try {
         console.log("Sending login request...");
 
-        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/login", {
+        const res = await fetch("task-production-eef1.up.railway.app/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })

@@ -22,7 +22,7 @@ async function loadTasks() {
     try {
         taskList.innerHTML = "<p>Loading tasks...</p>";
 
-        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/tasks");
+        const res = await fetch("task-production-eef1.up.railway.app/tasks");
         const data = await res.json();
 
         allTasks = data || [];
@@ -108,7 +108,7 @@ window.createTask = async function () {
     }
 
     try {
-        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/users");
+        const res = await fetch("task-production-eef1.up.railway.app/users");
         const users = await res.json();
 
         if (assignType === "all") {
@@ -137,7 +137,7 @@ window.createTask = async function () {
 
 
     async function sendTask(empId) {
-        await fetch("https://task-manager-backend-ct4g.onrender.com/tasks", {
+        await fetch("task-production-eef1.up.railway.app/tasks", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -156,7 +156,7 @@ window.createTask = async function () {
 /* ================= LOAD EMPLOYEE ================= */
 async function loadEmployeeDropdown() {
     try {
-        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/users");
+        const res = await fetch("task-production-eef1.up.railway.app/users");
         const users = await res.json();
 
         let options = `<option value="">Select Employee</option>`;
