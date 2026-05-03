@@ -80,7 +80,6 @@ async function signup() {
             msg.style.color = "lightgreen";
             msg.innerText = "Signup successful ✅";
 
-            // clear fields
             document.getElementById("name").value = "";
             document.getElementById("email").value = "";
             document.getElementById("password").value = "";
@@ -111,6 +110,8 @@ async function login() {
     }
 
     try {
+        console.log("Sending login request...");
+
         const res = await fetch("https://task-manager-backend-ct4g.onrender.com/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -119,18 +120,19 @@ async function login() {
 
         const data = await res.json();
 
+        console.log("Response:", data);
+
         if (res.ok) {
             localStorage.setItem("user", JSON.stringify(data.user));
-a
+
             const role = data.user.role?.toLowerCase().trim();
 
-            console.log("Logged user:", data.user);
             if (role === "admin") {
                 window.location.href = "dashboard.html";
             } else if (role === "member") {
                 window.location.href = "employee.html";
             } else {
-                alert("Invalid role ❗");
+                msg.innerText = "Invalid role ❗";
             }
 
         } else {
@@ -138,7 +140,7 @@ a
         }
 
     } catch (err) {
-        console.error(err);
+        console.error("Login error:", err);
         msg.innerText = "Server error ❌";
     }
 }
