@@ -69,7 +69,7 @@ function logout() {
 /* ================= DASHBOARD ================= */
 async function loadDashboard() {
     try {
-        const res = await fetch("task-production-eef1.up.railway.app/dashboard");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/dashboard");
         const data = await res.json();
 
         const total = document.getElementById("total");
@@ -89,7 +89,7 @@ async function loadDashboard() {
 /* ================= USERS ================= */
 async function loadUsers() {
     try {
-        const res = await fetch("task-production-eef1.up.railway.app/users");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/users");
         const data = await res.json();
 
         let html = "";
@@ -137,7 +137,7 @@ async function addEmployee() {
     }
 
     try {
-        const res = await fetch("task-production-eef1.up.railway.app/signup", {
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/signup", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

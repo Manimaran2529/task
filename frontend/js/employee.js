@@ -57,7 +57,7 @@ async function loadMyTasks() {
             taskList.innerHTML = "<p>Loading tasks...</p>";
         }
 
-        const res = await fetch("task-production-eef1.up.railway.app/tasks");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/tasks");
         const tasks = await res.json();
 
         const user = JSON.parse(localStorage.getItem("user"));
@@ -136,7 +136,7 @@ function renderTasks(tasks) {
 /* ================= COMPLETE ================= */
 window.completeTask = async function (id) {
     try {
-        await fetch(`task-production-eef1.up.railway.app/tasks/${id}`, {
+        await fetch(`https://task-manager-backend-ct4g.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: "Completed" })
@@ -162,7 +162,7 @@ window.reportIssue = async function (id) {
     }
 
     try {
-        await fetch(`task-production-eef1.up.railway.app/tasks/${id}`, {
+        await fetch(`https://task-manager-backend-ct4g.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
