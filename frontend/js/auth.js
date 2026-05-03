@@ -68,7 +68,7 @@ async function signup() {
     }
 
     try {
-        const res = await fetch("http://127.0.0.1:5000/signup", {
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, password, role })
@@ -111,7 +111,7 @@ async function login() {
     }
 
     try {
-        const res = await fetch("http://127.0.0.1:5000/login", {
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password })

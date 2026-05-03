@@ -45,7 +45,7 @@ async function loadMyTasks() {
             taskList.innerHTML = "<p>Loading tasks...</p>";
         }
 
-        const res = await fetch("http://127.0.0.1:5000/tasks");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/tasks");
         const tasks = await res.json();
 
         const user = JSON.parse(localStorage.getItem("user"));
@@ -124,7 +124,7 @@ function renderTasks(tasks) {
 /* ================= COMPLETE ================= */
 window.completeTask = async function (id) {
     try {
-        await fetch(`http://127.0.0.1:5000/tasks/${id}`, {
+        await fetch(`https://task-manager-backend-ct4g.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ status: "Completed" })
@@ -150,7 +150,7 @@ window.reportIssue = async function (id) {
     }
 
     try {
-        await fetch(`http://127.0.0.1:5000/tasks/${id}`, {
+        await fetch(`https://task-manager-backend-ct4g.onrender.com/tasks/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

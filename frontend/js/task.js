@@ -22,7 +22,7 @@ async function loadTasks() {
     try {
         taskList.innerHTML = "<p>Loading tasks...</p>";
 
-        const res = await fetch("http://127.0.0.1:5000/tasks");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/tasks");
         const data = await res.json();
 
         allTasks = data || [];
@@ -108,7 +108,7 @@ window.createTask = async function () {
     }
 
     try {
-        const res = await fetch("http://127.0.0.1:5000/users");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/users");
         const users = await res.json();
 
         if (assignType === "all") {
@@ -137,7 +137,7 @@ window.createTask = async function () {
 
 
     async function sendTask(empId) {
-        await fetch("http://127.0.0.1:5000/tasks", {
+        await fetch("https://task-manager-backend-ct4g.onrender.com/tasks", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
@@ -156,7 +156,7 @@ window.createTask = async function () {
 /* ================= LOAD EMPLOYEE ================= */
 async function loadEmployeeDropdown() {
     try {
-        const res = await fetch("http://127.0.0.1:5000/users");
+        const res = await fetch("https://task-manager-backend-ct4g.onrender.com/users");
         const users = await res.json();
 
         let options = `<option value="">Select Employee</option>`;
