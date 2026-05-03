@@ -121,7 +121,7 @@ async function login() {
 
         if (res.ok) {
             localStorage.setItem("user", JSON.stringify(data.user));
-
+a
             const role = data.user.role?.toLowerCase().trim();
 
             console.log("Logged user:", data.user);

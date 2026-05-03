@@ -1,3 +1,15 @@
+/* 🔒 ROLE PROTECTION (TOP - IMPORTANT) */
+const user = JSON.parse(localStorage.getItem("user") || "null");
+
+if (!user) {
+    window.location.href = "index.html";
+}
+
+// Only allow member
+if (user.role?.toLowerCase().trim() !== "member") {
+    window.location.href = "dashboard.html";
+}
+
 /* ================= INIT ================= */
 document.addEventListener("DOMContentLoaded", () => {
 

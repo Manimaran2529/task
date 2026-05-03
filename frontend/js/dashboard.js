@@ -1,5 +1,6 @@
 console.log("Dashboard Loaded");
 
+
 /* ================= ROLE PROTECTION ================= */
 const user = JSON.parse(localStorage.getItem("user"));
 
