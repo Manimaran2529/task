@@ -7,6 +7,7 @@ from routes.auth_routes import auth
 from routes.project_routes import project
 from routes.task_routes import task
 
+
 # DB
 from utils.db import get_db
 
@@ -20,10 +21,23 @@ app.register_blueprint(project)
 app.register_blueprint(task)
 
 
+
+
+
 # ================= HOME =================
 @app.route("/")
 def home():
     return {"message": "Backend is running 🚀"}
+
+@app.route("/")
+def home():
+    return {"message": "Backend is running 🚀"}
+
+
+# ✅ ADD THIS
+@app.before_request
+def init_db():
+    create_tables()
 
 
 # ================= CREATE TABLES =================
@@ -67,8 +81,7 @@ def create_tables():
     conn.close()
 
 
-# 🔥 IMPORTANT: RUN ALWAYS (FOR DEPLOY)
-create_tables()
+
 
 
 # ================= RUN =================
